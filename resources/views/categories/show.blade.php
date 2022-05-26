@@ -12,7 +12,7 @@
                         {{ $post->title }}
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">
-                        {{ $post->author }}
+                        {{ $post->autore }}
                     </h6>
                 </div>
                 <div class="col-12 m-3">

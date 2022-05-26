@@ -1,5 +1,5 @@
 
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
     <div class="wrapper w-75 mx-auto">
@@ -21,6 +21,17 @@
                         <input type="text" name="title" id="title" value="{{$post->title}}">
                         <div id="titleHelp" class="form-text">Inserisci un titolo che non potrai dimenticare</div>
                         @error('title')
+                            <div class="alert alert-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="title">Autore</label>
+                        <input type="text" name="autore" id="autore">
+                        <div id="titleHelp" class="form-text"></div>
+                        @error('autore')
                             <div class="alert alert-danger">
                                 {{ $message }}
                             </div>
@@ -60,5 +71,3 @@
         </div>
     </div>
 @endsection
-
-@dump($categories)

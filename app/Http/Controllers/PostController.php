@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $categories = Category::all();
+
+        return view('posts.create', compact('categories'));
     }
 
     /**
@@ -41,10 +44,12 @@ class PostController extends Controller
         $data = $request->all();
         
         
-        $newPost = new Post();
-        $newPost->create($data);
+        $newPost = Post::create($data);
+        $newPost->categories()->sync($data['category']);
+
+        return redirect()->route('posts.index')
+        ->with('message', $data['title']. " è stato pubblicato con successo.");
         
-        $newPost->save();
 
         
     
@@ -71,7 +76,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', $post);
+        $categories = Category::all();
+        return view('posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -92,6 +98,8 @@ class PostController extends Controller
         $post->title = $data['content'];
         
         $newPost->save();
+        return redirect()->route('posts.show', $post)
+        ->with('message', $data['title']. " è stato modificato con successo.");
 
     }
 
@@ -104,7 +112,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        //
+        return redirect()->route('posts.index')->with('deleted-message', "$post->title è stato eliminato con successo dalla lista dei post");
     }
 
 }

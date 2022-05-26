@@ -27,7 +27,7 @@
                                         </a>
                                     </h5>
                                     <h6 class="card-subtitle mb-2 text-muted">
-                                        {{ $post->author }}
+                                        {{ $post->autore }}
                                     </h6>
                                     <p class="card-text">
                                         {{ substr($post->content, 0, 70) }}

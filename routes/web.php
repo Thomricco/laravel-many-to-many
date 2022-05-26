@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', "PostController@index")->name('posts.index');
-Route::get('/post/{id}', "PostController@show")->name('posts.show');
 Route::get('/post/create', "PostController@create")->name('posts.create');
 Route::get('/post/edit', "PostController@create")->name('posts.edit');
+Route::post('/post', "PostController@store")->name('posts.store');
+Route::get('/post/{id}', "PostController@show")->name('posts.show');
+
+Route::resource('categories', 'CategoryController');
